@@ -68,7 +68,7 @@ public class CardServiceImplementation implements CardService {
 		if (card.getTitle() == null || card.getTitle().trim().equals("")) {
 			throw new CardException("Card com título inválido.");
 		}
-		boolean exists = repository.existsByTitle(card.getTitle());
+		boolean exists = repository.existsById(card.getId());
 		if (!exists) {
 			throw new CardException("Este Card não existe.");
 		}
