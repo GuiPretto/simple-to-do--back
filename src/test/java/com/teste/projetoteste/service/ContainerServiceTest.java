@@ -2,6 +2,7 @@ package com.teste.projetoteste.service;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
@@ -113,7 +114,7 @@ public class ContainerServiceTest {
 	@Test
 	public void shouldValidateExistentContainerWithNotUsedTitle() {
 		Container container = newContainer();
-		Mockito.when(repository.existsByTitle(Mockito.anyString())).thenReturn(true);
+		Mockito.when(repository.existsById(Mockito.anyInt())).thenReturn(true);
 		
 		service.validateExistentContainer(container);
 	}
@@ -121,7 +122,7 @@ public class ContainerServiceTest {
 	@Test
 	public void shouldThrowErrorWhenValidatingExistentContainerWithAlreadyUsedTitle() {
 		Container container = newContainer();
-		Mockito.when(repository.existsByTitle(Mockito.anyString())).thenReturn(false);
+		Mockito.when(repository.existsById(Mockito.anyInt())).thenReturn(false);
 				
 		ContainerException exception = assertThrows(ContainerException.class, () -> service.validateExistentContainer(container));
 		
@@ -146,6 +147,24 @@ public class ContainerServiceTest {
 		optContainer = service.getById(1);
 		
 		Assertions.assertThat(optContainer).isNotPresent();
+	}
+	
+	@Test
+	public void shouldGetAllContainers() {
+		Mockito.when(repository.findAll()).thenReturn(List.of(new Container()));
+		
+		List<Container> containerList = service.getAll();
+		
+		Assertions.assertThat(containerList.size()).isEqualByComparingTo(1);
+	}
+	
+	@Test
+	public void shouldReturnEmptyListWhenTryingToGetAllContainers() {
+		Mockito.when(repository.findAll()).thenReturn(List.of());
+		
+		List<Container> containerList = service.getAll();
+		
+		Assertions.assertThat(containerList).isEmpty();
 	}
 	
 	private Container newContainer() {

@@ -112,6 +112,25 @@ public class CardRepositoryTeste {
 		Assertions.assertThat(result).isFalse();
 	}
 	
+	@Test
+	public void shouldCheckForExistentId() {
+		Container container = Container.builder().title("Container Teste").build();
+		entityManager.persist(container);
+		Card card = Card.builder().title("Card Teste").container(container).build();
+		entityManager.persist(card);
+		
+		boolean result = repository.existsById(5);
+		
+		Assertions.assertThat(result).isTrue();
+	}
+	
+	@Test
+	public void shouldCheckForNonExistentId() {
+		boolean result  = repository.existsById(1);
+		
+		Assertions.assertThat(result).isFalse();
+	}
+	
 	private Card newCard() {
 		Container container = Container.builder().title("Container").build();
 		Card card = Card.builder().title("Teste").container(container).build();

@@ -7,5 +7,7 @@ import com.teste.projetoteste.model.entity.Card;
 public interface CardRepository extends JpaRepository<Card, Integer> {
 	
 	boolean existsByTitle(String title);
+	
+	boolean existsById(int id);
 
 }

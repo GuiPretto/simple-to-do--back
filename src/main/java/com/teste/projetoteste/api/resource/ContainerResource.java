@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,6 +24,7 @@ import com.teste.projetoteste.service.ContainerService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/containers")
 @RequiredArgsConstructor
 public class ContainerResource {
@@ -68,6 +71,23 @@ public class ContainerResource {
 				return ResponseEntity.badRequest().body(exception.getMessage());
 			}
 		}).orElseGet(() -> new ResponseEntity("Container não encontrado na base da dados.", HttpStatus.BAD_REQUEST));
+	}
+	
+	@GetMapping("/get/{id}")
+	public ResponseEntity get( @PathVariable("id") int id ) {
+		return service.getById(id)
+					.map( container -> new ResponseEntity(container, HttpStatus.OK))
+					.orElseGet( () -> new ResponseEntity("Container não encontrado na base da dados.",HttpStatus.NOT_FOUND));
+	}
+	
+	@GetMapping("/getAll")
+	public ResponseEntity getAll() {
+		try {
+			List<Container> containerList = service.getAll();
+			return new ResponseEntity(containerList, HttpStatus.OK);
+		} catch (ContainerException exception) {
+			return ResponseEntity.badRequest().body(exception.getMessage());
+		}
 	}
 	
 	private Container convert(ContainerDTO dto) {

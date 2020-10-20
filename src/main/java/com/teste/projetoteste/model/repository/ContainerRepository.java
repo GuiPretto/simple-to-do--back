@@ -8,4 +8,6 @@ public interface ContainerRepository extends JpaRepository<Container, Integer> {
 	
 	boolean existsByTitle(String title);
 	
+	boolean existsById(int id);
+
 }

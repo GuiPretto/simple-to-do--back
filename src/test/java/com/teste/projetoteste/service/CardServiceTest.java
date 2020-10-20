@@ -141,7 +141,7 @@ public class CardServiceTest  {
 	@Test
 	public void shouldValidateExistentCardWithNotUsedTitle() {
 		Card card = newCard();
-		Mockito.when(repository.existsByTitle(Mockito.anyString())).thenReturn(true);
+		Mockito.when(repository.existsById(Mockito.anyInt())).thenReturn(true);
 		
 		service.validateExistentCard(card);
 	}
@@ -149,7 +149,7 @@ public class CardServiceTest  {
 	@Test
 	public void shouldThrowErrorWhenValidatingExistentCardWithAlreadyUsedTitle() {
 		Card card = newCard();
-		Mockito.when(repository.existsByTitle(Mockito.anyString())).thenReturn(false);
+		Mockito.when(repository.existsById(Mockito.anyInt())).thenReturn(false);
 				
 		CardException exception = assertThrows(CardException.class, () -> service.validateExistentCard(card));
 		

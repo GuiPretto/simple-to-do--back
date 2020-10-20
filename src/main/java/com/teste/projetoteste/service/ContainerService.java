@@ -1,7 +1,9 @@
 package com.teste.projetoteste.service;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.teste.projetoteste.model.entity.Card;
 import com.teste.projetoteste.model.entity.Container;
 
 public interface ContainerService {
@@ -11,10 +13,12 @@ public interface ContainerService {
 		Container updateContainer(Container container);
 		
 		void deleteContainer(Container container);
-		
+				
 		void validateNewContainer(Container container);
 		
 		void validateExistentContainer(Container container);
 		
 		Optional<Container> getById(int id);
+		
+		List<Container> getAll();
 }

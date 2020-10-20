@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.print.attribute.standard.Media;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -15,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -23,6 +25,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teste.projetoteste.api.dto.ContainerDTO;
 import com.teste.projetoteste.exception.ContainerException;
+import com.teste.projetoteste.model.entity.Card;
 import com.teste.projetoteste.model.entity.Container;
 import com.teste.projetoteste.service.CardService;
 import com.teste.projetoteste.service.ContainerService;
@@ -155,5 +158,31 @@ public class ContainerResourceTest {
 		mvc
 			.perform(request)
 			.andExpect(MockMvcResultMatchers.status().isBadRequest());	
+	}
+
+	@Test
+	public void shouldGetContainer() throws Exception {
+		Container container = Container.builder().title("Teste").build();
+		Mockito.when(service.getById(Mockito.anyInt())).thenReturn(Optional.of(container));
+		
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+				.get(API.concat("/get/0"));
+		
+		MvcResult result = mvc
+					.perform(request)
+					.andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+		Assertions.assertThat(result.getResponse().getContentAsString()).isEqualTo("{\"id\":0,\"title\":\"Teste\"}");
+	}
+	
+	@Test
+	public void shouldThrowNotFoundWhenTryingToGetContainer() throws Exception {
+		Mockito.when(service.getById(Mockito.anyInt())).thenReturn(Optional.empty());
+		
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+				.get(API.concat("/get/0"));
+		
+		mvc
+			.perform(request)
+			.andExpect(MockMvcResultMatchers.status().isNotFound());
 	}
 }
