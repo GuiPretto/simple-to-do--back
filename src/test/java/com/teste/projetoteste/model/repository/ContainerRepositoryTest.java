@@ -88,6 +88,24 @@ public class ContainerRepositoryTest {
 		
 		Assertions.assertThat(result).isFalse();
 	}
+	
+	@Test
+	public void shouldCheckForExistentId() {
+		Container container = newContainer();
+
+		entityManager.persist(container);
+				
+		boolean result = repository.existsById(container.getId());
+		
+		Assertions.assertThat(result).isTrue();
+	}
+	
+	@Test
+	public void shouldCheckForNonExistentId() {
+		boolean result  = repository.existsById(1);
+		
+		Assertions.assertThat(result).isFalse();
+	}
 
 	private Container newContainer() {
 		return Container.builder().title("Teste").build();
