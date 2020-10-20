@@ -1,4 +1,4 @@
-package com.teste.projetoteste.api.resource;
+package com.guipretto.simpletodo.api.resource;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.teste.projetoteste.api.dto.CardDTO;
-import com.teste.projetoteste.exception.CardException;
-import com.teste.projetoteste.model.entity.Card;
-import com.teste.projetoteste.model.entity.Container;
-import com.teste.projetoteste.service.CardService;
-import com.teste.projetoteste.service.ContainerService;
+import com.guipretto.simpletodo.api.dto.CardDTO;
+import com.guipretto.simpletodo.exception.CardException;
+import com.guipretto.simpletodo.model.entity.Card;
+import com.guipretto.simpletodo.model.entity.Container;
+import com.guipretto.simpletodo.service.CardService;
+import com.guipretto.simpletodo.service.ContainerService;
 
 import lombok.RequiredArgsConstructor;
 

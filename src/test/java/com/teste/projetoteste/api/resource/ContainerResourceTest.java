@@ -2,8 +2,6 @@ package com.teste.projetoteste.api.resource;
 
 import java.util.Optional;
 
-import javax.print.attribute.standard.Media;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,14 +19,13 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.teste.projetoteste.api.dto.ContainerDTO;
-import com.teste.projetoteste.exception.ContainerException;
-import com.teste.projetoteste.model.entity.Card;
-import com.teste.projetoteste.model.entity.Container;
-import com.teste.projetoteste.service.CardService;
-import com.teste.projetoteste.service.ContainerService;
+import com.guipretto.simpletodo.api.dto.ContainerDTO;
+import com.guipretto.simpletodo.api.resource.ContainerResource;
+import com.guipretto.simpletodo.exception.ContainerException;
+import com.guipretto.simpletodo.model.entity.Container;
+import com.guipretto.simpletodo.service.CardService;
+import com.guipretto.simpletodo.service.ContainerService;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")

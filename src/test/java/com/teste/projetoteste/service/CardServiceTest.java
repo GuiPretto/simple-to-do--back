@@ -17,11 +17,11 @@ import org.springframework.data.domain.Example;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.teste.projetoteste.exception.CardException;
-import com.teste.projetoteste.model.entity.Card;
-import com.teste.projetoteste.model.entity.Container;
-import com.teste.projetoteste.model.repository.CardRepository;
-import com.teste.projetoteste.service.implementation.CardServiceImplementation;
+import com.guipretto.simpletodo.exception.CardException;
+import com.guipretto.simpletodo.model.entity.Card;
+import com.guipretto.simpletodo.model.entity.Container;
+import com.guipretto.simpletodo.model.repository.CardRepository;
+import com.guipretto.simpletodo.service.implementation.CardServiceImplementation;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
@@ -115,10 +115,10 @@ public class CardServiceTest  {
 	}
 	
 	@Test
+	@SuppressWarnings("unchecked")
 	public void shouldGetListOfCardsContainingAtLeasOneCard() {
 		Card card = newCard();
 		List<Card> cardList = Arrays.asList(card);
-		Example<Card> example;
 		Mockito.when(repository.findAll(Mockito.any(Example.class))).thenReturn(cardList);
 		
 		List<Card> newCardList = service.getAllWithContainerId(new Container());
@@ -127,10 +127,9 @@ public class CardServiceTest  {
 	}
 	
 	@Test
+	@SuppressWarnings("unchecked")
 	public void shouldGetListOfCardsEmpty() {
-		Card card = newCard();
 		List<Card> cardList = Arrays.asList();
-		Example<Card> example;
 		Mockito.when(repository.findAll(Mockito.any(Example.class))).thenReturn(cardList);
 		
 		List<Card> newCardList = service.getAllWithContainerId(new Container());

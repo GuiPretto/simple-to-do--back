@@ -1,4 +1,4 @@
-package com.teste.projetoteste.exception;
+package com.guipretto.simpletodo.exception;
 
 public class CardException extends RuntimeException {
 	public CardException(String error) {

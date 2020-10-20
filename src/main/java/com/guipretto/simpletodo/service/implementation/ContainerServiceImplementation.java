@@ -1,4 +1,4 @@
-package com.teste.projetoteste.service.implementation;
+package com.guipretto.simpletodo.service.implementation;
 
 import java.util.List;
 import java.util.Objects;
@@ -7,11 +7,10 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.teste.projetoteste.exception.ContainerException;
-import com.teste.projetoteste.model.entity.Card;
-import com.teste.projetoteste.model.entity.Container;
-import com.teste.projetoteste.model.repository.ContainerRepository;
-import com.teste.projetoteste.service.ContainerService;
+import com.guipretto.simpletodo.exception.ContainerException;
+import com.guipretto.simpletodo.model.entity.Container;
+import com.guipretto.simpletodo.model.repository.ContainerRepository;
+import com.guipretto.simpletodo.service.ContainerService;
 
 @Service
 public class ContainerServiceImplementation implements ContainerService {

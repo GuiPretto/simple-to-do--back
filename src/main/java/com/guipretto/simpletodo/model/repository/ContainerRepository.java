@@ -1,8 +1,8 @@
-package com.teste.projetoteste.model.repository;
+package com.guipretto.simpletodo.model.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.teste.projetoteste.model.entity.Container;
+import com.guipretto.simpletodo.model.entity.Container;
 
 public interface ContainerRepository extends JpaRepository<Container, Integer> {
 	
