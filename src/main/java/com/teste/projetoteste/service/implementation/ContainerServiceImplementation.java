@@ -1,5 +1,6 @@
 package com.teste.projetoteste.service.implementation;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -61,14 +62,21 @@ public class ContainerServiceImplementation implements ContainerService {
 		if (container.getTitle() == null || container.getTitle().trim().equals("")) {
 			throw new ContainerException("Container com título inválido.");
 		}
-		boolean exists = repository.existsByTitle(container.getTitle());
+		boolean exists = repository.existsById(container.getId());
 		if (!exists) {
 			throw new ContainerException("Este container não existe.");
 		}
 	}
+
+	@Override
+	@Transactional
+	public List<Container> getAll() {
+		return repository.findAll();
+	}		
 	
 	@Override
 	public Optional<Container> getById(int id) {
 		return repository.findById(id);
-	}		
+	}
+
 }
