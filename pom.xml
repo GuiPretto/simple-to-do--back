@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>public</scope>
+			<scope>tasks</scope>
 			<exclusions>
 				<exclusion>
 					<groupId>org.junit.vintage</groupId>
