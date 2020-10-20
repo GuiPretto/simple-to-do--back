@@ -1,7 +1,9 @@
 package com.teste.projetoteste.api.resource;
 
+import java.util.List;
 import java.util.Optional;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -13,11 +15,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 import com.teste.projetoteste.api.dto.CardDTO;
 import com.teste.projetoteste.exception.CardException;
 import com.teste.projetoteste.model.entity.Card;
@@ -92,7 +97,7 @@ public class CardResourceTest {
 		String jsonData = new ObjectMapper().writeValueAsString(dto);
 		
 		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-				.put(API.concat("/update/2"))
+				.put(API.concat("/update/0"))
 				.accept(JSON)
 				.contentType(JSON)
 				.content(jsonData);
@@ -112,7 +117,7 @@ public class CardResourceTest {
 		String jsonData = new ObjectMapper().writeValueAsString(dto);
 		
 		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-				.put(API.concat("/update/2"))
+				.put(API.concat("/update/0"))
 				.accept(JSON)
 				.contentType(JSON)
 				.content(jsonData);
@@ -130,7 +135,7 @@ public class CardResourceTest {
 		String jsonData = new ObjectMapper().writeValueAsString(dto);
 		
 		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-				.delete(API.concat("/delete/2"))
+				.delete(API.concat("/delete/0"))
 				.accept(JSON)
 				.contentType(JSON)
 				.content(jsonData);
@@ -148,7 +153,7 @@ public class CardResourceTest {
 		String jsonData = new ObjectMapper().writeValueAsString(dto);
 		
 		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-				.delete(API.concat("/delete/2"))
+				.delete(API.concat("/delete/0"))
 				.accept(JSON)
 				.contentType(JSON)
 				.content(jsonData);
@@ -156,5 +161,59 @@ public class CardResourceTest {
 		mvc
 			.perform(request)
 			.andExpect(MockMvcResultMatchers.status().isBadRequest());	
+	}
+	
+	@Test
+	public void shouldGetOneOrMoreCardsFromAContainerId() throws Exception {
+		Mockito.when(containerService.getById(Mockito.anyInt())).thenReturn(Optional.of(new Container()));
+		Mockito.when(service.getAllWithContainerId(Mockito.any(Container.class))).thenReturn(List.of(new Card()));
+		
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+				.get(API.concat("/getCards/0"));
+		
+		MvcResult result = mvc
+					.perform(request)
+					.andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+		Assertions.assertThat(result.getResponse().getContentAsString()).isEqualTo("[{\"id\":0,\"title\":null,\"container\":null}]");
+	}
+	
+	@Test
+	public void shouldGetEmptyListOfCardsFromAContainerId() throws Exception {
+		Mockito.when(containerService.getById(Mockito.anyInt())).thenReturn(Optional.of(new Container()));
+		Mockito.when(service.getAllWithContainerId(Mockito.any(Container.class))).thenReturn(List.of());
+		
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+				.get(API.concat("/getCards/0"));
+		
+		MvcResult result = mvc
+					.perform(request)
+					.andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+		Assertions.assertThat(result.getResponse().getContentAsString()).isEqualTo("[]");
+	}
+	
+	@Test
+	public void shouldGetCard() throws Exception {
+		Card card = Card.builder().title("Teste").container(new Container()).build();
+		Mockito.when(service.getById(Mockito.anyInt())).thenReturn(Optional.of(card));
+		
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+				.get(API.concat("/get/0"));
+		
+		MvcResult result = mvc
+					.perform(request)
+					.andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+		Assertions.assertThat(result.getResponse().getContentAsString()).isEqualTo("{\"id\":0,\"title\":\"Teste\",\"container\":{\"id\":0,\"title\":null}}");
+	}
+	
+	@Test
+	public void shouldThrowNotFoundWhenTryingToGetCard() throws Exception {
+		Mockito.when(service.getById(Mockito.anyInt())).thenReturn(Optional.empty());
+		
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+				.get(API.concat("/get/0"));
+		
+		mvc
+			.perform(request)
+			.andExpect(MockMvcResultMatchers.status().isNotFound());
 	}
 }
