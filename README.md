@@ -8,8 +8,10 @@ Back-End application built in Java, using SpringBoot and PostgreSQL.
 1. Install Eclipse IDE for Enterprise Java Developers.
 2. Install [Lombok](https://projectlombok.org/).
 3. Download and extract this repository.
-4. In Eclipse, File-> Import-> Maven-> Existing Maven Projects.
+4. In Eclipse, File -> Import -> Maven -> Existing Maven Projects.
 5. Select the repository extracted folder, then click Finish.
+
+Obs.: If the project shows some errors, you probably don't have JUnit 5. To fix this right-click the project and go: Properties -> Java Build Path -> Libraries. Select 'Classpath' and choose Add Library -> JUnit -> JUnit library version: JUnit 5 -> Finish. Finally, right-click the project again and go: Maven -> Update Project -> Ok.
 
 ### PostgreSQL
 1. Execute [PostgreSQL 13.0](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) installer. For password, type 'postgres', the same as the user, and for port, use the default '5432'.
