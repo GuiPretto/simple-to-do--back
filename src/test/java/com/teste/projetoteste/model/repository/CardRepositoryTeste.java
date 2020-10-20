@@ -16,8 +16,9 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.teste.projetoteste.model.entity.Card;
-import com.teste.projetoteste.model.entity.Container;
+import com.guipretto.simpletodo.model.entity.Card;
+import com.guipretto.simpletodo.model.entity.Container;
+import com.guipretto.simpletodo.model.repository.CardRepository;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")

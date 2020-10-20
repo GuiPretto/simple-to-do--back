@@ -15,10 +15,10 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.teste.projetoteste.exception.ContainerException;
-import com.teste.projetoteste.model.entity.Container;
-import com.teste.projetoteste.model.repository.ContainerRepository;
-import com.teste.projetoteste.service.implementation.ContainerServiceImplementation;
+import com.guipretto.simpletodo.exception.ContainerException;
+import com.guipretto.simpletodo.model.entity.Container;
+import com.guipretto.simpletodo.model.repository.ContainerRepository;
+import com.guipretto.simpletodo.service.implementation.ContainerServiceImplementation;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")

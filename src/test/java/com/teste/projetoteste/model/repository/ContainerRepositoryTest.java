@@ -8,7 +8,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.teste.projetoteste.model.entity.Container;
+import com.guipretto.simpletodo.model.entity.Container;
+import com.guipretto.simpletodo.model.repository.ContainerRepository;
 
 import java.util.Optional;
 

@@ -1,8 +1,8 @@
-package com.teste.projetoteste.model.repository;
+package com.guipretto.simpletodo.model.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.teste.projetoteste.model.entity.Card;
+import com.guipretto.simpletodo.model.entity.Card;
 
 public interface CardRepository extends JpaRepository<Card, Integer> {
 	

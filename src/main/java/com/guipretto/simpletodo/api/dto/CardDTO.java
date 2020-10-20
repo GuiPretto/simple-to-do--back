@@ -1,4 +1,4 @@
-package com.teste.projetoteste.api.dto;
+package com.guipretto.simpletodo.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

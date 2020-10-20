@@ -1,4 +1,4 @@
-package com.teste.projetoteste.service.implementation;
+package com.guipretto.simpletodo.service.implementation;
 
 import java.util.List;
 import java.util.Objects;
@@ -9,12 +9,11 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.teste.projetoteste.exception.CardException;
-import com.teste.projetoteste.exception.ContainerException;
-import com.teste.projetoteste.model.entity.Card;
-import com.teste.projetoteste.model.entity.Container;
-import com.teste.projetoteste.model.repository.CardRepository;
-import com.teste.projetoteste.service.CardService;
+import com.guipretto.simpletodo.exception.CardException;
+import com.guipretto.simpletodo.model.entity.Card;
+import com.guipretto.simpletodo.model.entity.Container;
+import com.guipretto.simpletodo.model.repository.CardRepository;
+import com.guipretto.simpletodo.service.CardService;
 
 @Service
 public class CardServiceImplementation implements CardService {

@@ -1,10 +1,9 @@
-package com.teste.projetoteste.service;
+package com.guipretto.simpletodo.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.teste.projetoteste.model.entity.Card;
-import com.teste.projetoteste.model.entity.Container;
+import com.guipretto.simpletodo.model.entity.Container;
 
 public interface ContainerService {
 
