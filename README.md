@@ -15,8 +15,10 @@ Obs.: If the project shows some errors, you probably don't have JUnit 5. To fix 
 
 ### PostgreSQL
 1. Execute [PostgreSQL 13.0](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) installer. For password, type 'postgres', the same as the user, and for port, use the default '5432'.
-2. After installation ends, start pgAdmin4 and search for 'postgres' default database. Then right click and choose 'Query Tool'.
-3. Copy and paste the contents of this [schema](https://github.com/GuiPretto/simple-to-do--back/blob/main/schema.sql) file and execute the query.
+2. After installation ends, start pgAdmin4 and search for 'postgres' default database. Then right-click and choose 'Query Tool'.
+3. Copy and paste the first line of the [schema](https://github.com/GuiPretto/simple-to-do--back/blob/main/schema.sql) file and execute the query.
+4. Then, right-click the newly created database 'simpletodo' and choose once again 'Query Tool'.
+5. Finally, copy and paste the rest of the [schema](https://github.com/GuiPretto/simple-to-do--back/blob/main/schema.sql) file and execute the query.
 
 Finally, run the main application file as 'Java Application' on Eclipse.
 
